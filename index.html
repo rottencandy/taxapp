@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tax calc</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="container">
+      <h1>Tax Calculator</h1>
+      <form>
+        <label>Bill amount</label>
+        <input id="billamt" type="text" paceholder="Add bill amount here" />
+        <button type="button" onclick="calculate()">Calculate!</button>
+      </form>
+      <div id="totalamt"></div>
+
+      <script>
+        var totalblock = document.getElementById('totalamt');
+
+        function calculate() {
+          var billamt = Number(document.getElementById('billamt').value);
+
+          var service = billamt * 0.1;
+          var gst = billamt * 0.05;
+          var tax = service + gst;
+          var final = billamt + tax;
+
+          if (isNaN(billamt)) {
+            details = `
+                <p>Invalid input! Please enter a number</p>
+            `;
+          } else {
+            var details = `
+                <label>Service charge(10%): <span id=serviceval>${service.toFixed(
+                  2,
+                )}</span> </label>
+                <label>GST(5%): <span id=gstval>${gst.toFixed(
+                  2,
+                )}</span> </label>
+                <label>Total tax: <span id=taxval>${tax.toFixed(
+                  2,
+                )}</span> </label>
+                <label>Final Amount: <span id=finalval>${final.toFixed(
+                  2,
+                )}</span> </label>
+            `;
+          }
+          totalblock.innerHTML = details;
+        }
+      </script>
+    </div>
+  </body>
+</html>
